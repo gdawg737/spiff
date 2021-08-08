@@ -1,5 +1,11 @@
 import React from "react";
 import Exercise from "../exercise/Exercise";
+// import ProgressBarContainer from "./components/progressbar/progressbarcontainer";
+import ProgressBar from "./components/progressbar/progressbar";
+import StartRequest from "./components/startrequest/startrequest";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "./components/progressbar/progressbar.css";
 
 const ProgressBarExercise = () => {
   return (
@@ -18,5 +24,19 @@ export default ProgressBarExercise;
 // ----------------------------------------------------------------------------------
 
 const Solution = () => {
-  return <div>Add solution here</div>;
+  // TODO: update styling
+  return (
+    <React.Fragment>
+      <ProgressBar
+        props={{progressPercent:50}} />
+      <StartRequest />
+      <button
+        style={{backgroundColor:"red"}}
+        onClick={() => {
+          // TODO: setup redux state
+          // dispatch(updateProgress(100))
+        }}
+      >Finish Request</button>
+    </React.Fragment>
+  );
 };

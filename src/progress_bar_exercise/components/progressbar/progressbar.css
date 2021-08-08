@@ -1,0 +1,6 @@
+#a123 {
+    border-width: 0px;
+}
+#a123:hover {
+    border-width: 2px;
+}
