@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function ProgressBar() {
-    
+export default function ProgressBar(state) {
     // pseudo styled component
     const styleProps = {
         height: "6px",
@@ -9,9 +8,16 @@ export default function ProgressBar() {
     }
 
     return (
-        <div id="a123" style={styleProps} >
-            <div style={{"backgroundColor":"green",height:"100%",width:"50%" /* TODO: props.progressPercent + "%"*/}} ></div>
+        <div id="ProgressBarId" 
+            onClick={() => {
+                document.getElementById("ProgressBarId").style.borderWidth = "3px";
+            }}
+            style={{...styleProps, visibility:state.bIsFinished ? "hidden" : "visible"}} >
+            <div style={{
+                "backgroundColor":"green",
+                height:"100%",
+                width:state.progressPercent + "%",
+            }}></div>
         </div>
     )
 }
-//

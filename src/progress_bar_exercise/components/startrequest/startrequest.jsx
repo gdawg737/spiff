@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { updateProgress, finishLoadingRequest } from "../../actions/appactions";
 
-export default function StartRequest(props) {
+export default function StartRequest(store) {
     
     const [loading, setLoading] = useState(false);
     const [buttonText, setButtonText] = useState();
+    const [requestTimer, setRequestTimer] = useState(0);
     let timeoutThread = null;
 
     // pseudo styled component
@@ -19,27 +21,29 @@ export default function StartRequest(props) {
             // styleProps["background-color"] = "grey";
             
             // update progress to 90 over 15 seconds
-            timeoutThread = window.setInterval(() => {
-                let currentProgress = props.progressPercent;
-                currentProgress += (90 / 15);
-                // TODO: setup redux state
-                // dispatch(updateProgress(currentProgress));
-                if (currentProgress == 90) {
-                    window.clearTimeout(timeoutThread);
-                }
-            }, 1000);
+            if (store.progressPercent < 90) {
+                timeoutThread = window.setTimeout(() => {
+                    let currentProgress = store.progressPercent + (90 / 15);
+                    // setRequestTimer(currentProgress);
+                    store.dispatch(updateProgress(currentProgress));
+                }, 150);
+            }
         } else {
             setButtonText("Start Request");
             // styleProps["background-color"] = "green";
         }
-    }, [loading, setButtonText]);
+    }, [loading, setButtonText, store.progressPercent]);
 
     useEffect(() => {
-        if (props.progressPercent >= 100) {
+        if (store.progressPercent >= 100) {
             setLoading(false);
             window.clearTimeout(timeoutThread);
+            window.setTimeout(() => {
+                debugger;
+                store.dispatch(finishLoadingRequest(true));
+            }, 300)
         }
-    }, [props.progressPercent]);
+    }, [store.progressPercent]);
     
 
 
