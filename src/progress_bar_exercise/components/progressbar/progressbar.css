@@ -1,0 +1,6 @@
+#ProgressBarId {
+    border-width: 0px;
+}
+#ProgressBarId:hover {
+    border-width: 2px;
+}

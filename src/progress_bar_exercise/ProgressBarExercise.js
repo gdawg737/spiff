@@ -1,5 +1,13 @@
 import React from "react";
 import Exercise from "../exercise/Exercise";
+import ProgressBarContainer from "./components/progressbar/progressbarcontainer";
+import StartRequestContainer from "./components/startrequest/startrequestcontainer";
+import { createStore } from "redux";
+import { appReducers } from "./reducers/appreducer";
+import { updateProgress } from "./actions/appactions";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "./components/progressbar/progressbar.css";
 
 const ProgressBarExercise = () => {
   return (
@@ -18,5 +26,26 @@ export default ProgressBarExercise;
 // ----------------------------------------------------------------------------------
 
 const Solution = () => {
-  return <div>Add solution here</div>;
+  const store = createStore(appReducers, {
+    progressPercent: 0,
+    bIsFinished: false,
+  });
+  // TODO: update styling
+  return (
+    <Provider store={store} >
+      <ProgressBarContainer />
+      <StartRequestContainer />
+      <button
+        style={{backgroundColor:"red"}}
+        onClick={() => {
+          store.dispatch(updateProgress(100));
+        }}
+      >Finish Request</button>
+      <input type="checkbox" id="toggleBreakpoints" name="toggleBreakpoints" value="Use Breakpoints?"
+        onClick={() => {
+          // TODO: 
+        }}
+      ></input>
+    </Provider>
+  );
 };
