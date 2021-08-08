@@ -4,7 +4,7 @@ import ProgressBarContainer from "./components/progressbar/progressbarcontainer"
 import StartRequestContainer from "./components/startrequest/startrequestcontainer";
 import { createStore } from "redux";
 import { appReducers } from "./reducers/appreducer";
-import { updateProgress, updateUseBreakpoints } from "./actions/appactions";
+import { updateProgress } from "./actions/appactions";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import "./components/progressbar/progressbar.css";
@@ -33,25 +33,19 @@ const Solution = () => {
   // TODO: update styling
   return (
     <Provider store={store} >
-      <ProgressBarContainer 
-      />
-      <StartRequestContainer 
-        breakpoints={[25,50]}
-      />
-      <br />
+      <ProgressBarContainer />
+      <StartRequestContainer />
       <button
         style={{backgroundColor:"red"}}
         onClick={() => {
           store.dispatch(updateProgress(100));
         }}
       >Finish Request</button>
-      <br />
-      <input type="checkbox" id="toggleBreakpoints" name="toggleBreakpoints"
-        onClick={(e) => {
-          store.dispatch(updateUseBreakpoints(e.currentTarget.checked));
+      <input type="checkbox" id="toggleBreakpoints" name="toggleBreakpoints" value="Use Breakpoints?"
+        onClick={() => {
+          // TODO: 
         }}
-      />
-      <label for="toggleBreakpoints">Use Breakpoints?</label>
+      ></input>
     </Provider>
   );
 };
