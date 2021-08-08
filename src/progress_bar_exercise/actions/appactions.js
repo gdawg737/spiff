@@ -1,4 +1,3 @@
-
 export const updateProgress = (newProgress) => {
     return {
         type: "UPDATE_PROGRESS",

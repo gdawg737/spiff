@@ -20,13 +20,12 @@ export default function StartRequest(store) {
             // TODO: better styling
             // styleProps["background-color"] = "grey";
             
-            // update progress to 90 over 15 seconds
+            // update progress to 90% over 15 seconds
             if (store.progressPercent < 90) {
                 timeoutThread = window.setTimeout(() => {
                     let currentProgress = store.progressPercent + (90 / 15);
-                    // setRequestTimer(currentProgress);
                     store.dispatch(updateProgress(currentProgress));
-                }, 150);
+                }, 1000);
             }
         } else {
             setButtonText("Start Request");
@@ -41,7 +40,7 @@ export default function StartRequest(store) {
             window.setTimeout(() => {
                 debugger;
                 store.dispatch(finishLoadingRequest(true));
-            }, 300)
+            }, 3000)
         }
     }, [store.progressPercent]);
     
@@ -50,8 +49,6 @@ export default function StartRequest(store) {
     return (
         <button
             style={styleProps}
-            // TODO: disable not in spec
-            // disabled={loading}
             onClick={
                 () => {
                     setLoading(true);
